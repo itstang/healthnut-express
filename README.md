@@ -2,7 +2,7 @@
 
 Clone repo:
 ```
-$ git clone https://github.com/itstang/healthnut-express
+$ git clone git@github.com:itstang/healthnut-express.git
 $ cd healthnut-express
 ```
 
