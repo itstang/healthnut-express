@@ -1,4 +1,9 @@
 import User from '../models/user.model';
+import {
+  Weight,
+  Height
+} from '../formulas/measurement';
+import { getTdee } from '../formulas/nutrition.formulas';
 
 /**
  * Load user and append to req.
@@ -89,6 +94,19 @@ function updateMacros(req, res, next) {
     .catch(e => next(e));
 }
 
+/* eslint-disable no-unused-vars */
+function updateTDEE(req, res, next) {
+  const profile = req.user.profile;
+  const weight = new Weight(profile.weight.magnitude, profile.weight.unit);
+  const height = new Height(profile.height.magnitude, profile.height.unit);
+
+  profile.tdee = getTdee(profile.exerciseFrequency, weight, height, profile.age, profile.sex);
+
+  req.user.save()
+    .then(savedUser => res.json(savedUser))
+    .catch(e => next(e));
+}
+
 /**
  * Get user list.
  * @property {number} req.query.skip - Number of users to be skipped.
@@ -113,4 +131,4 @@ function remove(req, res, next) {
     .catch(e => next(e));
 }
 
-export default { load, get, create, update, getMacros, updateMacros, list, remove };
+export default { load, get, create, update, getMacros, updateMacros, list, remove, updateTDEE };
