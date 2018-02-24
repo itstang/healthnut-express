@@ -29,6 +29,9 @@ router.route('/:userId/macros')
   /** PUT /api/users/:userId - Update user macros*/
   .put(userCtrl.updateMacros);
 
+router.route('/:userId/tdee')
+  .put(userCtrl.updateTDEE);
+
 /** Load user when API with userId route parameter is hit */
 router.param('userId', userCtrl.load);
 

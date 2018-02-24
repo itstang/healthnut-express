@@ -24,6 +24,14 @@ const UserSchema = new mongoose.Schema({
   profile: {
     firstName: { type: String },
     lastName: { type: String },
+    weight: {
+      magnitude: { type: Number },
+      unit: { type: String }
+    },
+    height: {
+      magnitude: { type: Number },
+      unit: { type: String }
+    },
     age: { type: Number },
     sex: {
       type: String,
